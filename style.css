@@ -111,7 +111,42 @@ body {
 }
 
 /* About & Projects sections */
-.about, .projects {
+
+.about {
+  background: var(--card);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 1px solid #7773;
+  line-height: 1.7;
+  font-size: 18px;
+  color: var(--text);
+  max-width: 900px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: all 0.3s ease;
+}
+
+.about h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.about p {
+  margin-bottom: 20px;
+}
+
+.about a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.about a:hover {
+  text-decoration: underline;
+}
+
+
+.projects {
   background: var(--card);
   padding: 30px;
   border-radius: 18px;
