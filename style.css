@@ -71,65 +71,66 @@ body {
 }
 
 /* -------------------- SIDEBAR -------------------- */
-.sidebar {
-  width: 160px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  background: rgba(24,26,32,0.95);
-  backdrop-filter: blur(5px);
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  border-right: 1px solid #4443;
-}
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 160px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: rgba(24,26,32,0.95);
+    backdrop-filter: blur(5px);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid #4443;
+  }
 
-.sidebar .title {
-  font-size: 24px;
-  font-weight: 700;
-}
+  .sidebar .title {
+    font-size: 24px;
+    font-weight: 700;
+  }
 
-.sidebar a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-  font-size: 17px;
-  opacity: 0.9;
-  padding: 10px 0;
-  transition: color 0.2s;
-}
+  .sidebar a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 17px;
+    opacity: 0.9;
+    padding: 10px 0;
+    transition: color 0.2s;
+  }
 
-.sidebar a:hover {
-  color: var(--accent);
-}
+  .sidebar a:hover {
+    color: var(--accent);
+  }
 
-.toggle {
-  margin-top: auto;
-  padding: 12px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
+  .toggle {
+    margin-top: auto;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
 
-.toggle:hover {
-  background: #3730a3;
-}
+  .toggle:hover {
+    background: #3730a3;
+  }
 
 /* -------------------- CONTENT CONTAINER -------------------- */
-.content-container {
-  display: grid;
-  grid-template-columns: 1fr 320px; /* main | right panel */
-  gap: 30px;
-  margin-left: 260px; /* space for fixed sidebar */
-  padding: 40px;
+  .content-container {
+    display: grid;
+    grid-template-columns: 1fr 320px; /* main | right panel */
+    gap: 30px;
+    margin-left: 160px; /* space for fixed sidebar */
+    padding: 40px;
+  }
 }
-
 /* -------------------- HERO SECTION -------------------- */
 .hero {
   background: linear-gradient(135deg, #0f1116 0%, #1a1d24 100%);
