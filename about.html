@@ -1,0 +1,28 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+<div class="sidebar">
+<div class="title">CYBER INTEL</div>
+<a href="index.html">Home</a>
+<a href="posts.html">Blog Posts</a>
+<a href="projects.html">Cyber Projects</a>
+<a href="about.html">About Me</a>
+<div class="toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
+</div>
+<div class="main">
+<h1>About Me</h1>
+<div class="about">
+<p>Your professional bio goes here. Focus on cyber threat intelligence, certifications, and experience.</p>
+</div>
+</div>
+<script>function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}</script>
+</body>
+</html>
+```
