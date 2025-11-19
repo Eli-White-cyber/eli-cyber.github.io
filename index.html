@@ -1,57 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Intel Blog</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="light">
-<!-- Sidebar -->
-<div class="sidebar">
-<div class="title">CYBER INTEL</div>
-<a href="index.html">Home</a>
-<a href="posts.html">Blog Posts</a>
-<a href="projects.html">Cyber Projects</a>
-<a href="about.html">About Me</a>
-<div class="toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
-</div>
+<body>
 
-
-<!-- Main content -->
-<div class="main">
-<h1>Welcome to My Cyber Intelligence Portfolio</h1>
-<p>Latest intelligence briefings and analyses on cybersecurity, malware, and threat trends.</p>
-
-
-<a href="posts/2025-11-18-cyber-brief.html" style="text-decoration:none;">
-  <div class="post-card">
-    <h3>Sample Cyber Threat Report</h3>
-    <span class="tag">Malware</span>
-    <span class="tag">Threat Intel</span>
-    <p>Preview of daily intelligence reporting and analysis.</p>
+  <div class="sidebar">
+    <div class="title">My Cyber Blog</div>
+    <a href="index.html">Home</a>
+    <a href="posts.html">Posts</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <div class="toggle">Toggle Dark Mode</div>
   </div>
-</a>
-</div>
 
-<script>
-function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}
-  
-  const toggle = document.querySelector('.toggle');
-  const body = document.body;
+  <div class="main">
+    <h1>Recent Posts</h1>
 
-  // Load saved theme
-  if(localStorage.getItem('theme')) {
-    body.setAttribute('data-theme', localStorage.getItem('theme'));
-  }
+    <a href="posts/2025-11-18-cyber-brief.html" style="text-decoration:none;">
+      <div class="post-card">
+        <h3>Cyber Threat Report</h3>
+        <span class="tag">Malware</span>
+        <span class="tag">Threat Intel</span>
+        <p>Preview of daily cyber intelligence reporting and analysis.</p>
+      </div>
+    </a>
 
-  // Toggle theme
-  toggle.addEventListener('click', () => {
-    const current = body.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
-    body.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
-</script>
+  </div>
+
+  <script>
+    const toggle = document.querySelector('.toggle');
+    const body = document.body;
+
+    if(localStorage.getItem('theme')) {
+      body.setAttribute('data-theme', localStorage.getItem('theme'));
+    }
+
+    toggle.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+
 </body>
 </html>
