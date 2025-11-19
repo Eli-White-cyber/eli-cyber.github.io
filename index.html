@@ -8,7 +8,7 @@
 </head>
 <body data-theme="light">
 
-  <!-- SIDEBAR -->
+  <!-- LEFT SIDEBAR -->
   <div class="sidebar">
     <div class="title">My Cyber Blog</div>
     <a href="index.html">Home</a>
@@ -18,41 +18,55 @@
     <div class="toggle">Toggle Dark Mode</div>
   </div>
 
-  <!-- MAIN LAYOUT -->
-  <main class="layout">
+  <!-- MAIN CONTENT + RIGHT PANEL -->
+  <div class="content-container">
 
-    <!-- MAIN CONTENT -->
-    <section class="main-content">
-      <h1>Recent Posts</h1>
-      <div id="recent-posts"></div>
-    </section>
+    <!-- MAIN SECTION -->
+    <main class="main">
+      
+      <!-- HERO SECTION -->
+      <section class="hero">
+        <h1>Elijah White</h1>
+        <h2>Cybersecurity Major | Aspiring HSI/FBI Cyber Agent</h2>
+        <p>Sharing insights, cyber intel, and personal projects in the world of security operations.</p>
+      </section>
 
-    <!-- RIGHT SIDEBAR PANEL -->
+      <!-- RECENT POSTS -->
+      <section class="posts">
+        <h2>Recent Posts</h2>
+        <div id="recent-posts"></div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT PANEL -->
     <aside class="right-panel">
-      <h2>Quick Links</h2>
+      <section>
+        <h3>Skills</h3>
+        <div class="skills-grid">
+          <div class="skill-card">Sec+</div>
+          <div class="skill-card">Net+</div>
+          <div class="skill-card">CCNA</div>
+          <div class="skill-card">CySA+</div>
+        </div>
+      </section>
 
-      <div class="card">
-        <h3>Contact & Profiles</h3>
+      <section>
+        <h3>Career Goals</h3>
+        <p>Aspiring to work as a cyber agent for HSI or FBI, focusing on threat intel and digital forensics.</p>
+      </section>
+
+      <section>
+        <h3>Profiles</h3>
         <ul>
           <li><a href="#" target="_blank">LinkedIn</a></li>
           <li><a href="#" target="_blank">Medium</a></li>
           <li><a href="#" target="_blank">GitHub</a></li>
         </ul>
-      </div>
-
-      <div class="card">
-        <h3>Focus Areas</h3>
-        <ul>
-          <li>Cyber Threat Intel</li>
-          <li>Incident Response</li>
-          <li>Network Security</li>
-          <li>Digital Forensics</li>
-        </ul>
-      </div>
-
+      </section>
     </aside>
 
-  </main>
+  </div>
 
   <!-- JAVASCRIPT -->
   <script>
