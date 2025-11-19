@@ -1,49 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
 
-/* -------------------- COLOR VARIABLES -------------------- */
+/* -------------------- COLORS -------------------- */
 :root {
   --bg: #f3f4f6;
+  --bg-secondary: #e5e7eb;
   --text: #111111;
   --accent: #4f46e5;
   --card: #ffffff;
   --accent-soft: rgba(79, 70, 229, 0.15);
-  --bg-secondary: #e5e7eb;
 }
 
 [data-theme="dark"] {
   --bg: #0d1117;
+  --bg-secondary: #1a1b22;
   --text: #e6edf3;
   --accent: #6366f1;
   --card: #161b22;
   --accent-soft: rgba(99, 102, 241, 0.15);
-  --bg-secondary: #1a1b22;
 }
 
-/* -------------------- GLOBAL STYLES -------------------- */
+/* -------------------- GLOBAL -------------------- */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  display: grid;
-  grid-template-columns: 260px 1fr 320px; /* Sidebar | Main | Right Panel */
-  gap: 20px;
   transition: all 0.3s ease;
 }
 
-/* -------------------- LEFT NAVIGATION SIDEBAR -------------------- */
+/* -------------------- SIDEBAR -------------------- */
 .sidebar {
-  background: rgba(24, 26, 32, 0.95);
-  backdrop-filter: blur(5px);
+  width: 260px;
+  position: fixed;
   height: 100vh;
+  background: rgba(24,26,32,0.95);
+  backdrop-filter: blur(5px);
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   border-right: 1px solid #4443;
-  color: var(--text);
-  position: fixed;
-  width: 260px;
 }
 
 .sidebar .title {
@@ -65,12 +62,11 @@ body {
   color: var(--accent);
 }
 
-/* Toggle Dark Mode Button */
 .toggle {
   margin-top: auto;
   padding: 12px;
   background: var(--accent);
-  color: white;
+  color: #fff;
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
@@ -82,13 +78,53 @@ body {
   background: #3730a3;
 }
 
-/* -------------------- MAIN CONTENT -------------------- */
-.main {
+/* -------------------- CONTENT CONTAINER -------------------- */
+.content-container {
+  display: grid;
+  grid-template-columns: 1fr 320px; /* main | right panel */
+  gap: 30px;
+  margin-left: 260px; /* space for fixed sidebar */
   padding: 40px;
-  max-width: 1000px;
 }
 
-/* -------------------- POST CARDS -------------------- */
+.main {
+  padding: 0; /* container handles padding */
+}
+
+/* -------------------- HERO SECTION -------------------- */
+.hero {
+  background: linear-gradient(135deg, #0f1116 0%, #1a1d24 100%);
+  color: #fff;
+  padding: 60px 40px;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+}
+
+.hero h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.hero h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* -------------------- POSTS -------------------- */
 .post-card {
   background: var(--card);
   padding: 24px;
@@ -119,11 +155,13 @@ body {
 }
 
 /* -------------------- RIGHT PANEL -------------------- */
-.right-sidebar {
-  padding: 30px 20px;
+.right-panel {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 20px;
 }
 
-.right-sidebar section {
+.right-panel section {
   background: var(--card);
   padding: 20px;
   margin-bottom: 24px;
@@ -132,7 +170,7 @@ body {
   transition: transform 0.2s;
 }
 
-.right-sidebar section:hover {
+.right-panel section:hover {
   transform: translateY(-4px);
 }
 
@@ -157,45 +195,16 @@ body {
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* -------------------- ABOUT & PROJECTS -------------------- */
-.about, .projects {
-  background: var(--card);
-  padding: 40px;
-  border-radius: 18px;
-  border: 1px solid #7773;
-  line-height: 1.7;
-  font-size: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  transition: all 0.3s ease;
-}
-
-.about h1, .projects h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-.about a, .projects a {
-  color: var(--accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.about a:hover, .projects a:hover {
-  text-decoration: underline;
-}
-
 /* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 1200px) {
-  body {
-    grid-template-columns: 1fr; /* Stack all columns */
+  .content-container {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    padding: 20px;
   }
   .sidebar {
     position: relative;
     width: 100%;
     height: auto;
-  }
-  .main, .right-sidebar {
-    padding: 20px;
   }
 }
