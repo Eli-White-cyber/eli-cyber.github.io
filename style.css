@@ -1,10 +1,9 @@
-/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* Root colors */
+/* Color variables */
 :root {
   --bg: #f3f4f6;
-  --text: #111;
+  --text: #111111;
   --accent: #4f46e5;
   --card: #ffffff;
   --accent-soft: rgba(79, 70, 229, 0.15);
@@ -18,7 +17,7 @@
   --accent-soft: rgba(99, 102, 241, 0.15);
 }
 
-/* Body */
+/* Global styles */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -62,6 +61,7 @@ body {
   color: var(--accent);
 }
 
+/* Toggle button */
 .toggle {
   margin-top: auto;
   padding: 12px;
