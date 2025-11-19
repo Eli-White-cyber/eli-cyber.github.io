@@ -1,51 +1,151 @@
-/* Import Google Font */
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* Apply the font to the whole site */
+/* Root colors */
+:root {
+  --bg: #f3f4f6;
+  --text: #111111;
+  --accent: #4f46e5;
+  --card: #ffffff;
+  --accent-soft: rgba(79, 70, 229, 0.15);
+}
+
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --text: #e6edf3;
+  --accent: #6366f1;
+  --card: #161b22;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+}
+
 body {
+  margin: 0;
   font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  transition: all 0.3s ease;
 }
 
-/* Card hover effect */
-.post-card {
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Sidebar translucent */
+/* Sidebar */
 .sidebar {
+  width: 260px;
   background: rgba(24, 26, 32, 0.95);
   backdrop-filter: blur(5px);
+  height: 100vh;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid #4443;
 }
 
-:root {
---bg: #ffffff;
---text: #111111;
---accent: #4f46e5;
---card: #f3f4f6;
---accent-soft: rgba(79, 70, 229, 0.15);
+.sidebar .title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
-[data-theme="dark"] {
---bg: #0d1117;
---text: #e6edf3;
---accent: #6366f1;
---card: #161b22;
---accent-soft: rgba(99, 102, 241, 0.15);
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 17px;
+  opacity: 0.9;
+  padding: 10px 0;
+  transition: color 0.2s;
 }
-body { margin:0; font-family: Arial,sans-serif; background:var(--bg); color:var(--text); transition:.3s ease; display:flex; }
-.sidebar { width:260px; background:var(--card); height:100vh; padding:30px 20px; box-sizing:border-box; position:fixed; display:flex; flex-direction:column; gap:24px; border-right:1px solid #4443; }
-.sidebar .title { font-size:24px; font-weight:bold; }
-.sidebar a { text-decoration:none; color:var(--text); display:block; padding:10px 0; font-size:17px; opacity:0.9; font-weight:500; }
-.sidebar a:hover { color:var(--accent); }
-.main { margin-left:260px; padding:40px; max-width:900px; }
-.search-box { margin-bottom:20px; }
-.search-box input { width:100%; padding:12px; border-radius:10px; border:1px solid #7775; background:var(--card); color:var(--text); }
-.post-card { background:var(--card); padding:24px; border-radius:16px; margin-bottom:24px; border:1px solid #7773; }
-.post-card:hover { border-color:var(--accent); }
-.tag { display:inline-block; background:var(--accent-soft); color:var(--accent); padding:4px 10px; border-radius:6px; font-size:13px; margin-right:6px; }
-.toggle { margin-top:auto; padding:12px; background:var(--accent); color:white; border-radius:10px; text-align:center; cursor:pointer; font-weight:bold; }
-.about { background:var(--card); padding:30px; border-radius:18px; margin-top:40px; border:1px solid #7773; }
-h1,h2,h3 { letter-spacing:0.5px; }
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.toggle {
+  margin-top: auto;
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.toggle:hover {
+  background: #3730a3;
+}
+
+/* Main content */
+.main {
+  margin-left: 280px;
+  padding: 40px;
+  max-width: 1000px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Post Cards */
+.post-card {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #7773;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-right: 6px;
+}
+
+/* About section */
+.about {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid #7773;
+}
+
+/* Search box */
+.search-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #7775;
+  background: var(--card);
+  color: var(--text);
+}
+
+/* Links inside posts */
+.main a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.main a:hover {
+  text-decoration: underline;
+}
