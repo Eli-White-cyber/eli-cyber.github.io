@@ -1,0 +1,42 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{POST_TITLE}}</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body data-theme="light">
+<div class="sidebar">
+<div class="title">CYBER INTEL</div>
+<a href="../index.html">Home</a>
+<a href="../posts.html">Blog Posts</a>
+<a href="../projects.html">Cyber Projects</a>
+<a href="../about.html">About Me</a>
+<div class="toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
+</div>
+<div class="main">
+<h1>{{POST_TITLE}}</h1>
+<p><strong>Date:</strong> {{POST_DATE}}</p>
+<p><strong>Tags:</strong> {{TAG1}}, {{TAG2}}</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>{{SUMMARY}}</p>
+<h2>Key Findings</h2>
+<ul>
+<li>{{FINDING1}}</li>
+<li>{{FINDING2}}</li>
+<li>{{FINDING3}}</li>
+</ul>
+<h2>Technical Analysis</h2>
+<p>{{TECH_DETAILS}}</p>
+<h2>Impact Assessment</h2>
+<p>{{IMPACT}}</p>
+<h2>Mitigation Recommendations</h2>
+<p>{{MITIGATION}}</p>
+</div>
+<script>function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}</script>
+</body>
+</html>
+```
