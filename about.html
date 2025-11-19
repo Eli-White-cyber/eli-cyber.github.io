@@ -22,23 +22,23 @@
 <p>Your professional bio goes here. Focus on cyber threat intelligence, certifications, and experience.</p>
 </div>
 </div>
-<script>function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}</script>
-</body>
 <script>
-const toggle = document.querySelector('.toggle');
-const body = document.body;
+  function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}
+  const toggle = document.querySelector('.toggle');
+  const body = document.body;
 
-// Load saved theme
-if(localStorage.getItem('theme')) {
-  body.setAttribute('data-theme', localStorage.getItem('theme'));
-}
+  // Load saved theme
+  if(localStorage.getItem('theme')) {
+    body.setAttribute('data-theme', localStorage.getItem('theme'));
+  }
 
-// Toggle theme
-toggle.addEventListener('click', () => {
-  const current = body.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  body.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-});
+  // Toggle theme
+  toggle.addEventListener('click', () => {
+    const current = body.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
 </script>
+</body>
 </html>
