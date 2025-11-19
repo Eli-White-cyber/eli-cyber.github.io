@@ -19,32 +19,44 @@
 
   <div class="main">
     <h1>Recent Posts</h1>
-
-    <a href="posts/2025-11-18-cyber-brief.html" style="text-decoration:none;">
-      <div class="post-card">
-        <h3>Cyber Threat Report</h3>
-        <span class="tag">Malware</span>
-        <span class="tag">Threat Intel</span>
-        <p>Preview of daily cyber intelligence reporting and analysis.</p>
-      </div>
-    </a>
-
+    <div id="recent-posts"></div>
   </div>
 
   <script>
     const toggle = document.querySelector('.toggle');
     const body = document.body;
 
+    // Load saved theme
     if(localStorage.getItem('theme')) {
       body.setAttribute('data-theme', localStorage.getItem('theme'));
     }
 
+    // Toggle dark mode
     toggle.addEventListener('click', () => {
       const current = body.getAttribute('data-theme');
       const next = current === 'light' ? 'dark' : 'light';
       body.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
+
+    // Load posts dynamically
+    fetch('posts/posts.json')
+      .then(res => res.json())
+      .then(posts => {
+        const container = document.getElementById('recent-posts');
+        posts.forEach(post => {
+          const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+          container.innerHTML += `
+            <a href="posts/${post.file}" style="text-decoration:none;">
+              <div class="post-card">
+                <h3>${post.title}</h3>
+                ${tags}
+                <p>${post.preview}</p>
+              </div>
+            </a>
+          `;
+        });
+      });
   </script>
 
 </body>
