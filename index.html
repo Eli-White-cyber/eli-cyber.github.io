@@ -6,8 +6,9 @@
   <title>Cyber Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="light">
 
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="title">My Cyber Blog</div>
     <a href="index.html">Home</a>
@@ -17,46 +18,43 @@
     <div class="toggle">Toggle Dark Mode</div>
   </div>
 
-  <div class="main">
-  <div class="right-sidebar">
+  <!-- MAIN LAYOUT -->
+  <main class="layout">
 
-  <section class="profile-card">
-    <h2>Elijah White</h2>
-    <p>Cybersecurity Major & CS Minor — Anderson University</p>
-    <p>Certifications: Sec+, Net+, working on CCNA & CySA+</p>
+    <!-- MAIN CONTENT -->
+    <section class="main-content">
+      <h1>Recent Posts</h1>
+      <div id="recent-posts"></div>
+    </section>
 
-    <div class="social-links">
-      <a href="#" target="_blank">LinkedIn</a>
-      <a href="#" target="_blank">Medium</a>
-      <a href="#" target="_blank">GitHub</a>
-    </div>
-  </section>
+    <!-- RIGHT SIDEBAR PANEL -->
+    <aside class="right-panel">
+      <h2>Quick Links</h2>
 
-  <section class="skills-section">
-    <h3>Technical Skills</h3>
-    <div class="skills-grid">
-      <div class="skill-card">Threat Intelligence</div>
-      <div class="skill-card">Network Security</div>
-      <div class="skill-card">Python / Scripting</div>
-      <div class="skill-card">SIEM & Log Analysis</div>
-      <div class="skill-card">Incident Response</div>
-    </div>
-  </section>
+      <div class="card">
+        <h3>Contact & Profiles</h3>
+        <ul>
+          <li><a href="#" target="_blank">LinkedIn</a></li>
+          <li><a href="#" target="_blank">Medium</a></li>
+          <li><a href="#" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
 
-  <section class="intel-feed">
-    <h3>🛡 Live Cyber Intel</h3>
-    <ul>
-      <li>• New Cisco IOS vulnerability CVE-2025-XXXX disclosed</li>
-      <li>• US-CERT warns about phishing wave targeting .gov emails</li>
-      <li>• Microsoft patches zero-day in Exchange servers</li>
-    </ul>
-  </section>
-  </div>
+      <div class="card">
+        <h3>Focus Areas</h3>
+        <ul>
+          <li>Cyber Threat Intel</li>
+          <li>Incident Response</li>
+          <li>Network Security</li>
+          <li>Digital Forensics</li>
+        </ul>
+      </div>
 
-    <h1>Recent Posts</h1>
-    <div id="recent-posts"></div>
-  </div>
+    </aside>
 
+  </main>
+
+  <!-- JAVASCRIPT -->
   <script>
     const toggle = document.querySelector('.toggle');
     const body = document.body;
@@ -82,7 +80,7 @@
         posts.forEach(post => {
           const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
           container.innerHTML += `
-            <a href="posts/${post.file}" style="text-decoration:none;">
+            <a href="posts/${post.file}" class="post-link">
               <div class="post-card">
                 <h3>${post.title}</h3>
                 ${tags}
