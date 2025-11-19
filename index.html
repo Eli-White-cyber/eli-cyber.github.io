@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Elijah White | Cyber Portfolio</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="light">
 
   <!-- LEFT SIDEBAR -->
   <div class="sidebar">
-    <div class="title">Eli's Cyber Blog</div>
+    <div class="title">My Cyber Blog</div>
     <a href="index.html">Home</a>
     <a href="posts.html">Posts</a>
     <a href="about.html">About</a>
@@ -20,53 +24,50 @@
     <div class="toggle">Toggle Dark Mode</div>
   </div>
 
-  <!-- MAIN CONTENT + RIGHT PANEL -->
+  <!-- MAIN + RIGHT PANEL -->
   <div class="content-container">
 
-    <!-- MAIN SECTION -->
+    <!-- MAIN CONTENT -->
     <main class="main">
-      
+
       <!-- HERO SECTION -->
       <section class="hero">
         <h1>Elijah White</h1>
         <h2>Cybersecurity Major | Aspiring HSI/FBI Cyber Agent</h2>
-        <p>Sharing insights, cyber intel, and personal projects in the world of security operations.</p>
+        <p>Sharing insights, cyber intel, and personal projects in the world of cybersecurity.</p>
       </section>
 
-      <!-- RECENT POSTS -->
+      <!-- POSTS FEED -->
       <section class="posts" id="recent-posts">
-        <h2>Recent Posts</h2>
-        <div id="recent-posts"></div>
+        <!-- Dynamic posts will load here -->
       </section>
 
     </main>
 
     <!-- RIGHT PANEL -->
     <aside class="right-panel">
-      <section>
-        <h3>Certifications</h3>
-        <div class="skills-grid">
-          <div class="skill-card">Sec+</div>
-          <div class="skill-card">Net+</div>
-          <div class="skill-card">CCNA</div>
-          <div class="skill-card">CySA+</div>
-        </div>
-      </section>
 
-      <section>
-        <h3>Career Goals</h3>
-        <p>Aspiring to work as a cyber agent for HSI or FBI, focusing on threat intel and digital forensics.</p>
-        <p>As well as working with computer networking and networking security are specialties.</p>
-      </section>
-
-      <section>
-        <h3>Profiles</h3>
+      <section class="skills">
+        <h3>Skills & Certifications</h3>
         <ul>
-          <li><a href="#" target="https://www.linkedin.com/in/elijah-white-385050368/">LinkedIn</a></li>
-          <li><a href="#" target="https://medium.com/@eswhite2004">Medium</a></li>
-          <li><a href="#" target="https://github.com/Eli-White-cyber/eli-cyber.github.io/tree/main">GitHub</a></li>
+          <li>Sec+</li>
+          <li>Net+</li>
+          <li>CCNA (in progress)</li>
+          <li>CySA+ (in progress)</li>
         </ul>
       </section>
+
+      <section class="career-goals">
+        <h3>Career Goals</h3>
+        <p>Aspiring HSI/FBI Cyber Agent focused on cybersecurity operations and threat intelligence.</p>
+      </section>
+
+      <section class="links">
+        <h3>Profiles</h3>
+        <a href="https://medium.com/@eliwhite" target="_blank">Medium</a><br>
+        <a href="https://www.linkedin.com/in/elijah-white" target="_blank">LinkedIn</a>
+      </section>
+
     </aside>
 
   </div>
@@ -89,7 +90,7 @@
       localStorage.setItem('theme', next);
     });
 
-    // Load posts dynamically
+    // Load posts dynamically from posts/posts.json
     fetch('posts/posts.json')
       .then(res => res.json())
       .then(posts => {
@@ -97,7 +98,7 @@
         posts.forEach(post => {
           const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
           container.innerHTML += `
-            <a href="posts/${post.file}" class="post-link">
+            <a href="posts/${post.file}" style="text-decoration:none;">
               <div class="post-card">
                 <h3>${post.title}</h3>
                 ${tags}
