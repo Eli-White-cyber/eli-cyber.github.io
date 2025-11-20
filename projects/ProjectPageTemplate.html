@@ -1,81 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home SOC Lab</title>
-  <link rel="stylesheet" href="../style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home SOC Lab</title>
+<link rel="stylesheet" href="../style.css">
 </head>
 <body data-theme="light">
 
-  <!-- LEFT NAV -->
-  <nav class="nav-left">
-    <div class="brand">
-      <div class="logo">EW</div>
-      <div class="brand-text">
-        <div class="name">Elijah White</div>
-        <div class="sub">Cyber Portfolio</div>
-      </div>
+<nav class="nav-left">
+  <div class="brand">
+    <div class="logo">EW</div>
+    <div class="brand-text">
+      <div class="name">Elijah White</div>
+      <div class="sub">Cyber Portfolio</div>
     </div>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../posts.html">All Posts</a></li>
-      <li><a href="../about.html">About Me</a></li>
-      <li><a href="../projects.html">Projects</a></li>
-    </ul>
-    <div class="nav-bottom">
-      <button class="toggle">Toggle Dark Mode</button>
-      <div class="small-note">JetBrains × Clean Tech</div>
-    </div>
-  </nav>
-
-  <!-- CONTENT -->
-  <div class="content-wrapper">
-
-    <!-- CENTER -->
-    <main class="center-column">
-      <article class="article-content">
-        <h1>Home SOC Lab</h1>
-        <p class="muted"><em>November 2025</em></p>
-
-        <h2>Overview</h2>
-        <p>Explain what this lab/project is about...</p>
-
-        <h2>Setup & Tools</h2>
-        <ul>
-          <li>Tool 1</li>
-          <li>Tool 2</li>
-          <li>Configuration steps</li>
-        </ul>
-
-        <h2>Results / Key Learnings</h2>
-        <p>Discuss what you accomplished or learned here...</p>
-
-        <hr>
-      </article>
-    </main>
-
-    <!-- RIGHT PANEL -->
-    <aside class="right-column">
-      <section class="card">
-        <h3>Project Info</h3>
-        <p>Skills Used: Networking, Security, Python</p>
-        <p>Tools: Wireshark, VirtualBox, Kali Linux</p>
-      </section>
-    </aside>
   </div>
 
-  <script>
-    const toggleBtn = document.querySelector('.toggle');
-    const body = document.body;
-    if(localStorage.getItem('theme')) body.setAttribute('data-theme', localStorage.getItem('theme'));
-    toggleBtn.addEventListener('click', () => {
-      const current = body.getAttribute('data-theme') || 'light';
-      const next = current === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-  </script>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Home</a></li>
+    <li><a href="../posts.html" class="nav-link">All Posts</a></li>
+    <li><a href="../projects.html" class="nav-link">Projects</a></li>
+    <li><a href="../about.html" class="nav-link">About Me</a></li>
+  </ul>
+
+  <div class="nav-bottom">
+    <button class="toggle">Toggle Dark Mode</button>
+    <div class="small-note">JetBrains × Clean Tech</div>
+  </div>
+</nav>
+
+<div class="content-wrapper">
+  <main class="center-column">
+    <h1>Home SOC Lab</h1>
+    <p><em>November 2025</em></p>
+
+    <h2>Overview</h2>
+    <p>Explain what this lab/project is about...</p>
+
+    <h2>Setup & Tools</h2>
+    <ul>
+      <li>Tool 1</li>
+      <li>Tool 2</li>
+      <li>Configuration steps</li>
+    </ul>
+
+    <h2>Results / Key Learnings</h2>
+    <p>Discuss what you accomplished or learned here...</p>
+  </main>
+
+  <aside class="right-column">
+    <section class="card">
+      <h3>Skills & Tools</h3>
+      <ul class="small-list">
+        <li>CompTIA Security+, Network+</li>
+        <li>CCNA (in progress), CySA+ (studying)</li>
+        <li>Python · C++ · Log Analysis · OSINT</li>
+      </ul>
+    </section>
+  </aside>
+</div>
+
+<script>
+const toggle = document.querySelector('.toggle');
+const body = document.body;
+if(localStorage.getItem('theme')) body.setAttribute('data-theme',localStorage.getItem('theme'));
+toggle.addEventListener('click', () => {
+  const current = body.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  body.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+</script>
 
 </body>
 </html>
