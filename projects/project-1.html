@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home SOC Lab</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body data-theme="light">
+
+<div class="sidebar">
+  <div class="title">CYBER INTEL</div>
+  <a href="../index.html">Home</a>
+  <a href="../posts.html">Blog Posts</a>
+  <a href="../projects.html">Cyber Projects</a>
+  <a href="../about.html">About Me</a>
+  <div class="toggle">Toggle Dark Mode</div>
+</div>
+
+<div class="main">
+  <h1>Home SOC Lab</h1>
+  <p><em>November 2025</em></p>
+
+  <h2>Overview</h2>
+  <p>Explain what this lab/project is about...</p>
+
+  <h2>Setup & Tools</h2>
+  <ul>
+    <li>Tool 1</li>
+    <li>Tool 2</li>
+    <li>Configuration steps</li>
+  </ul>
+
+  <h2>Results / Key Learnings</h2>
+  <p>Discuss what you accomplished or learned here...</p>
+</div>
+
+<script>
+const toggle = document.querySelector('.toggle');
+const body = document.body;
+if(localStorage.getItem('theme')) body.setAttribute('data-theme',localStorage.getItem('theme'));
+toggle.addEventListener('click', () => {
+  const current = body.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  body.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+</script>
+
+</body>
+</html>
