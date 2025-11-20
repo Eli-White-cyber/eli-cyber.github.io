@@ -1,42 +1,73 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{POST_TITLE}}</title>
-<link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Title — Cyber Portfolio</title>
+  <link rel="stylesheet" href="../style.css"> <!-- adjust path as needed -->
 </head>
 <body data-theme="light">
-<div class="sidebar">
-<div class="title">CYBER INTEL</div>
-<a href="../index.html">Home</a>
-<a href="../posts.html">Blog Posts</a>
-<a href="../projects.html">Cyber Projects</a>
-<a href="../about.html">About Me</a>
-<div class="toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
-</div>
-<div class="main">
-<h1>{{POST_TITLE}}</h1>
-<p><strong>Date:</strong> {{POST_DATE}}</p>
-<p><strong>Tags:</strong> {{TAG1}}, {{TAG2}}</p>
-<hr>
-<h2>Executive Summary</h2>
-<p>{{SUMMARY}}</p>
-<h2>Key Findings</h2>
-<ul>
-<li>{{FINDING1}}</li>
-<li>{{FINDING2}}</li>
-<li>{{FINDING3}}</li>
-</ul>
-<h2>Technical Analysis</h2>
-<p>{{TECH_DETAILS}}</p>
-<h2>Impact Assessment</h2>
-<p>{{IMPACT}}</p>
-<h2>Mitigation Recommendations</h2>
-<p>{{MITIGATION}}</p>
-</div>
-<script>function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}</script>
+
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../posts.html">All Posts</a></li>
+      <li><a href="../about.html">About Me</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="center-column">
+    <article class="article-content">
+      <h1>Post Title</h1>
+      <p>Write your post content here…</p>
+      <p>More paragraphs, images, code blocks, lists, etc.</p>
+    </article>
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right-column">
+    <section class="card">
+      <h3>Post Info</h3>
+      <p>Date: 2025-11-19</p>
+      <p>Tags: <span class="tag">Cyber</span> <span class="tag">Threat Intel</span></p>
+    </section>
+    <section class="card">
+      <h3>Skills & Certs</h3>
+      <ul class="small-list">
+        <li>Security+, Network+</li>
+        <li>CCNA (in progress), CySA+</li>
+        <li>Python · C++ · Threat Intel</li>
+      </ul>
+    </section>
+  </aside>
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle');
+    const body = document.body;
+    if(localStorage.getItem('theme')) {
+      body.setAttribute('data-theme', localStorage.getItem('theme'));
+    }
+    toggleBtn.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+
 </body>
 </html>
-```
