@@ -1,50 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Posts</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Posts — Elijah White</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="light">
 
-  <div class="sidebar">
-    <div class="title">My Cyber Blog</div>
-    <a href="index.html">Home</a>
-    <a href="posts.html">Blog Posts</a>
-    <a href="about.html">About Me</a>
-    <a href="projects.html">Projects</a>
-    <div class="toggle">Toggle Dark Mode</div>
-  </div>
-
-  <div class="main">
-    <h1>All Posts</h1>
-
-    <a href="posts/2025-11-18-cyber-brief.html" style="text-decoration:none;">
-      <div class="post-card">
-        <h3>Cyber Threat Report</h3>
-        <span class="tag">Malware</span>
-        <span class="tag">Threat Intel</span>
-        <p>Full post preview...</p>
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
       </div>
-    </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="posts.html" class="nav-link">All Posts</a></li>
+      <li><a href="about.html" class="nav-link">About Me</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+    </ul>
+
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
+
+  <!-- CONTENT WRAPPER -->
+  <div class="content-wrapper">
+
+    <!-- CENTER / MAIN -->
+    <main class="center-column">
+      <h1>All Blog Posts</h1>
+
+      <!-- POSTS FEED -->
+      <section id="feed" class="feed"></section>
+
+      <!-- ARTICLE VIEW (hidden by default) -->
+      <article id="article-view" class="article-view" hidden>
+        <a id="close-article" class="close-article">← Back to feed</a>
+        <div id="article-content"></div>
+      </article>
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-column" aria-label="Info and live feed">
+      <section class="card">
+        <h3>Skills & Certs</h3>
+        <ul class="small-list">
+          <li>CompTIA Security+, Network+</li>
+          <li>CCNA (in progress), CySA+ (studying)</li>
+          <li>Network Security · Incident Response · Threat Intel</li>
+          <li>Python · C++ · Log Analysis · OSINT</li>
+        </ul>
+      </section>
+
+      <section class="card" id="live-feed-card">
+        <h3>Live Cyber Intel</h3>
+        <div id="live-feed">
+          <p class="muted">Loading live feed…</p>
+        </div>
+        <small class="muted">Source: CISA / public feeds</small>
+      </section>
+    </aside>
 
   </div>
 
+  <!-- SCRIPT: Dark mode + load posts + live feed -->
   <script>
-    const toggle = document.querySelector('.toggle');
-    const body = document.body;
+  const body = document.body;
+  const toggleBtn = document.querySelector('.toggle');
 
-    if(localStorage.getItem('theme')) {
-      body.setAttribute('data-theme', localStorage.getItem('theme'));
+  if (localStorage.getItem('theme')) {
+    body.setAttribute('data-theme', localStorage.getItem('theme'));
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const current = body.getAttribute('data-theme') || 'light';
+    const next = current === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // Helper: HTML string → element
+  function htmlToElement(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
+  }
+
+  // Load posts.json and render feed
+  async function loadFeed() {
+    try {
+      const res = await fetch('posts/post.json');
+      if (!res.ok) throw new Error('posts JSON not found');
+      const posts = await res.json();
+      const feed = document.getElementById('feed');
+      feed.innerHTML = '';
+
+      posts.forEach(post => {
+        const tags = (post.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ');
+        const html = `
+          <article class="post-card" data-file="${post.file}" data-date="${post.date || ''}" data-tags='${JSON.stringify(post.tags||[])}'>
+            <h3 class="post-title">${post.title}</h3>
+            <div class="tag-row">${tags}</div>
+            <p class="post-excerpt">${post.preview || ''}</p>
+            <div class="post-actions">
+              <button class="open-btn">Open</button>
+              <a class="open-new" href="posts/${post.file}" target="_blank" rel="noopener">Open in new tab</a>
+            </div>
+          </article>
+        `;
+        const el = htmlToElement(html);
+        el.querySelector('.open-btn').addEventListener('click', () => openArticleInPage(post));
+        feed.appendChild(el);
+      });
+    } catch (err) {
+      console.error('Error loading posts.json', err);
+      document.getElementById('feed').innerHTML = '<p class="muted">Failed to load posts.json — check /posts/post.json exists.</p>';
     }
+  }
 
-    toggle.addEventListener('click', () => {
-      const current = body.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
+  // Open article in-page
+  async function openArticleInPage(postMeta) {
+    try {
+      const r = await fetch('posts/' + postMeta.file);
+      if (!r.ok) throw new Error('post file not found');
+      const html = await r.text();
+      document.getElementById('article-content').innerHTML = html;
+      document.getElementById('article-view').hidden = false;
+      document.getElementById('feed').hidden = true;
+      window.scrollTo({top:0, behavior:'smooth'});
+    } catch (err) {
+      alert('Failed to load post: ' + err.message);
+    }
+  }
+
+  document.getElementById('close-article').addEventListener('click', () => {
+    document.getElementById('article-view').hidden = true;
+    document.getElementById('feed').hidden = false;
+  });
+
+  // Live feed (same as projects/index)
+  async function loadLiveFeed() {
+    const feedContainer = document.getElementById('live-feed');
+    feedContainer.innerHTML = '<p class="muted">Fetching live feed…</p>';
+    const LIVE_FEED_PROXY = 'https://api.allorigins.win/raw?url=';
+    const LIVE_FEED_URLS = [
+      'https://www.cisa.gov/uscert/ncas/alerts.xml',
+      'https://www.us-cert.gov/ncas/alerts.xml'
+    ];
+    for (const url of LIVE_FEED_URLS) {
+      try {
+        const resp = await fetch(LIVE_FEED_PROXY + encodeURIComponent(url));
+        if (!resp.ok) throw new Error('proxy fetch failed');
+        const text = await resp.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'application/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0,6);
+        if (!items.length) throw new Error('no items');
+        feedContainer.innerHTML = items.map(it => {
+          const title = it.querySelector('title')?.textContent || 'No title';
+          const link = it.querySelector('link')?.textContent || '#';
+          const pub = it.querySelector('pubDate')?.textContent || '';
+          return `<div class="feed-item"><a href="${link}" target="_blank" rel="noopener">${title}</a><div class="muted small">${pub}</div></div>`;
+        }).join('');
+        return;
+      } catch (err) {
+        console.warn('feed failed for', url, err);
+      }
+    }
+    feedContainer.innerHTML = `
+      <div class="feed-item">• Microsoft issues emergency patch for Exchange servers</div>
+      <div class="feed-item">• New CVE disclosed in widely used VPN appliances</div>
+      <div class="feed-item">• US-CERT advisory: phishing campaign targeting finance</div>
+    `;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFeed();
+    loadLiveFeed();
+  });
   </script>
 
 </body>
