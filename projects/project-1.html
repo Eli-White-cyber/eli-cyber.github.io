@@ -5,34 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home SOC Lab</title>
 <link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body data-theme="light">
 
-<div class="sidebar">
-  <div class="title">CYBER INTEL</div>
-  <a href="../index.html">Home</a>
-  <a href="../posts.html">Blog Posts</a>
-  <a href="../projects.html">Cyber Projects</a>
-  <a href="../about.html">About Me</a>
-  <div class="toggle">Toggle Dark Mode</div>
-</div>
+<!-- LEFT NAV -->
+<nav class="nav-left">
+  <div class="brand">
+    <div class="logo">EW</div>
+    <div class="brand-text">
+      <div class="name">Elijah White</div>
+      <div class="sub">Cyber Portfolio</div>
+    </div>
+  </div>
 
-<div class="main">
-  <h1>Home SOC Lab</h1>
-  <p><em>November 2025</em></p>
-
-  <h2>Overview</h2>
-  <p>Explain what this lab/project is about...</p>
-
-  <h2>Setup & Tools</h2>
-  <ul>
-    <li>Tool 1</li>
-    <li>Tool 2</li>
-    <li>Configuration steps</li>
+  <ul class="nav-links">
+    <li><a href="../index.html" class="nav-link">Home</a></li>
+    <li><a href="../posts.html" class="nav-link">All Posts</a></li>
+    <li><a href="../projects.html" class="nav-link">Projects</a></li>
+    <li><a href="../about.html" class="nav-link">About Me</a></li>
   </ul>
 
-  <h2>Results / Key Learnings</h2>
-  <p>Discuss what you accomplished or learned here...</p>
+  <div class="nav-bottom">
+    <button class="toggle">Toggle Dark Mode</button>
+    <div class="small-note">JetBrains × Clean Tech</div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content-wrapper">
+
+  <!-- CENTER / MAIN -->
+  <main class="center-column">
+    <h1>Home SOC Lab</h1>
+    <p><em>November 2025</em></p>
+
+    <h2>Overview</h2>
+    <p>Explain what this lab/project is about...</p>
+
+    <h2>Setup & Tools</h2>
+    <ul>
+      <li>Tool 1</li>
+      <li>Tool 2</li>
+      <li>Configuration steps</li>
+    </ul>
+
+    <h2>Results / Key Learnings</h2>
+    <p>Discuss what you accomplished or learned here...</p>
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right-column">
+    <section class="card">
+      <h3>Skills & Tools</h3>
+      <ul class="small-list">
+        <li>CompTIA Security+, Network+</li>
+        <li>CCNA (in progress), CySA+ (studying)</li>
+        <li>Python · C++ · Log Analysis · OSINT</li>
+      </ul>
+    </section>
+  </aside>
+
 </div>
 
 <script>
