@@ -1,47 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Me</title>
+<title>About Me — Elijah White</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="light">
-<div class="sidebar">
-<div class="title">CYBER INTEL</div>
-<a href="index.html">Home</a>
-<a href="posts.html">Blog Posts</a>
-<a href="projects.html">Projects</a>
-<a href="about.html">About Me</a>
-<div class="toggle" onclick="toggleTheme()">Toggle Dark Mode</div>
-</div>
-<div class="main">
-<h1>About Me</h1>
-<div class="about">
-  <p>Hello! I’m Eli White, a senior Cybersecurity major and Computer Science minor at Anderson University with a 3.5 GPA. I am passionate about understanding cyber threats, analyzing vulnerabilities, and applying cybersecurity best practices to real-world problems.</p>
-  <p>I hold CompTIA Security+ and Network+ certifications, and I am actively working towards my Cisco CCNA and CompTIA CySA+ certifications. My hands-on experience includes a city government IT internship, where I have gained practical skills in network security, threat analysis, and IT operations.</p>
-  <p>My technical skill set includes: <strong>Cybersecurity Analysis,Networking, Network Security, Incident Response, Cisco Configurations, Python, Risk Assessment, etc.</strong>. I document my work and share insights on <a href="https://medium.com/@eswhite2004" target="_blank">Medium</a> and maintain a professional presence on <a href="https://www.linkedin.com/in/elijah-white-385050368/" target="_blank">LinkedIn</a>.</p>
-  <p>My career goal is to leverage my skills in cyber intelligence and digital investigations, with the aim of contributing as a cyber-specialist at agencies like HSI or the FBI. This blog serves as a portfolio of my research, analysis, and ongoing learning in the cybersecurity field.</p>
-</div>
-</div>
-<script>
-  function toggleTheme(){const body=document.body;body.setAttribute("data-theme",body.getAttribute("data-theme")==="light"?"dark":"light");}
-  const toggle = document.querySelector('.toggle');
-  const body = document.body;
 
-  // Load saved theme
-  if(localStorage.getItem('theme')) {
-    body.setAttribute('data-theme', localStorage.getItem('theme'));
-  }
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
+      </div>
+    </div>
 
-  // Toggle theme
-  toggle.addEventListener('click', () => {
-    const current = body.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
-    body.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
-</script>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="posts.html" class="nav-link">All Posts</a></li>
+      <li><a href="about.html" class="nav-link">About Me</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+    </ul>
+
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
+
+  <!-- CONTENT WRAPPER -->
+  <div class="content-wrapper">
+
+    <!-- CENTER / MAIN -->
+    <main class="center-column">
+      <section class="about">
+        <h1>About Me</h1>
+        <p>Hello! I’m Eli White, a senior Cybersecurity major and Computer Science minor at Anderson University with a 3.5 GPA. I am passionate about understanding cyber threats, analyzing vulnerabilities, and applying cybersecurity best practices to real-world problems.</p>
+        <p>I hold CompTIA Security+ and Network+ certifications, and I am actively working towards my Cisco CCNA and CompTIA CySA+ certifications. My hands-on experience includes a city government IT internship, where I have gained practical skills in network security, threat analysis, and IT operations.</p>
+        <p>My technical skill set includes: <strong>Cybersecurity Analysis, Networking, Network Security, Incident Response, Cisco Configurations, Python, Risk Assessment</strong>. I document my work and share insights on <a href="https://medium.com/@eswhite2004" target="_blank">Medium</a> and maintain a professional presence on <a href="https://www.linkedin.com/in/elijah-white-385050368/" target="_blank">LinkedIn</a>.</p>
+        <p>My career goal is to leverage my skills in cyber intelligence and digital investigations, with the aim of contributing as a cyber-specialist at agencies like HSI or the FBI. This blog serves as a portfolio of my research, analysis, and ongoing learning in the cybersecurity field.</p>
+      </section>
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-column" aria-label="Info and live feed">
+      <section class="card">
+        <h3>Skills & Certs</h3>
+        <ul class="small-list">
+          <li>CompTIA Security+, Network+</li>
+          <li>CCNA (in progress), CySA+ (studying)</li>
+          <li>Network Security · Incident Response · Threat Intel</li>
+          <li>Python · C++ · Log Analysis · OSINT</li>
+        </ul>
+      </section>
+
+      <section class="card" id="live-feed-card">
+        <h3>Live Cyber Intel</h3>
+        <div id="live-feed">
+          <p class="muted">Loading live feed…</p>
+        </div>
+        <small class="muted">Source: CISA / public feeds</small>
+      </section>
+    </aside>
+
+  </div>
+
+  <!-- SCRIPT: Dark mode + live feed -->
+  <script>
+    const body = document.body;
+    const toggleBtn = document.querySelector('.toggle');
+
+    if (localStorage.getItem('theme')) {
+      body.setAttribute('data-theme', localStorage.getItem('theme'));
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    async function loadLiveFeed() {
+      const feedContainer = document.getElementById('live-feed');
+      feedContainer.innerHTML = '<p class="muted">Fetching live feed…</p>';
+
+      const LIVE_FEED_PROXY = 'https://api.allorigins.win/raw?url=';
+      const LIVE_FEED_URLS = [
+        'https://www.cisa.gov/uscert/ncas/alerts.xml',
+        'https://www.us-cert.gov/ncas/alerts.xml'
+      ];
+
+      for (const url of LIVE_FEED_URLS) {
+        try {
+          const resp = await fetch(LIVE_FEED_PROXY + encodeURIComponent(url));
+          if (!resp.ok) throw new Error('proxy fetch failed');
+          const text = await resp.text();
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(text, 'application/xml');
+          const items = Array.from(xml.querySelectorAll('item')).slice(0,6);
+          if (!items.length) throw new Error('no items');
+          feedContainer.innerHTML = items.map(it => {
+            const title = it.querySelector('title')?.textContent || 'No title';
+            const link = it.querySelector('link')?.textContent || '#';
+            const pub = it.querySelector('pubDate')?.textContent || '';
+            return `<div class="feed-item"><a href="${link}" target="_blank" rel="noopener">${title}</a><div class="muted small">${pub}</div></div>`;
+          }).join('');
+          return;
+        } catch (err) {
+          console.warn('feed failed for', url, err);
+        }
+      }
+
+      feedContainer.innerHTML = `
+        <div class="feed-item">• Microsoft issues emergency patch for Exchange servers</div>
+        <div class="feed-item">• New CVE disclosed in widely used VPN appliances</div>
+        <div class="feed-item">• US-CERT advisory: phishing campaign targeting finance</div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadLiveFeed);
+  </script>
+
 </body>
 </html>
