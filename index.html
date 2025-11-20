@@ -27,7 +27,7 @@
     <ul class="nav-links">
       <li><a href="index.html" class="nav-link">Home</a></li>
       <li><a href="posts.html" class="nav-link">All Posts</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="about.html" class="nav-link">About Me</a></li>
       <li><a href="projects.html" class="nav-link">Projects</a></li>
     </ul>
 
@@ -101,7 +101,7 @@
   // ----------------------
   // Config
   // ----------------------
-  const POSTS_JSON = 'posts/posts.json'; // must exist in /posts
+  const POSTS_JSON = 'posts/post.json'; // must exist in /posts
   const LIVE_FEED_PROXY = 'https://api.allorigins.win/raw?url='; // free proxy; may rate-limit
   const LIVE_FEED_URLS = [
     'https://www.cisa.gov/uscert/ncas/alerts.xml',
@@ -139,7 +139,7 @@
   // ----------------------
   async function loadFeed() {
     try {
-      const r = await fetch(POSTS_JSON);
+      const r = await fetch(POST_JSON);
       if (!r.ok) throw new Error('posts JSON not found');
       const posts = await r.json();
 
@@ -244,8 +244,8 @@
         a.addEventListener('click', async (e) => {
           e.preventDefault();
           const file = a.getAttribute('data-file');
-          const postsResp = await fetch(POSTS_JSON);
-          const postsJson = await postsResp.json();
+          const postResp = await fetch(POST_JSON);
+          const postJson = await postResp.json();
           const found = postsJson.find(x=>x.file===file);
           if (found) openArticleInPage(found);
         });
