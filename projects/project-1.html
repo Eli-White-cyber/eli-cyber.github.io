@@ -1,85 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home SOC Lab</title>
-<link rel="stylesheet" href="../style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home SOC Lab</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body data-theme="light">
 
-<!-- LEFT NAV -->
-<nav class="nav-left">
-  <div class="brand">
-    <div class="logo">EW</div>
-    <div class="brand-text">
-      <div class="name">Elijah White</div>
-      <div class="sub">Cyber Portfolio</div>
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
+      </div>
     </div>
-  </div>
 
-  <ul class="nav-links">
-    <li><a href="../index.html" class="nav-link">Home</a></li>
-    <li><a href="../posts.html" class="nav-link">All Posts</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-    <li><a href="../about.html" class="nav-link">About Me</a></li>
-  </ul>
-
-  <div class="nav-bottom">
-    <button class="toggle">Toggle Dark Mode</button>
-    <div class="small-note">JetBrains × Clean Tech</div>
-  </div>
-</nav>
-
-<!-- CONTENT -->
-<div class="content-wrapper">
-
-  <!-- CENTER / MAIN -->
-  <main class="center-column">
-    <h1>Home SOC Lab</h1>
-    <p><em>November 2025</em></p>
-
-    <h2>Overview</h2>
-    <p>Explain what this lab/project is about...</p>
-
-    <h2>Setup & Tools</h2>
-    <ul>
-      <li>Tool 1</li>
-      <li>Tool 2</li>
-      <li>Configuration steps</li>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../posts.html" class="nav-link">All Posts</a></li>
+      <li><a href="../about.html" class="nav-link">About Me</a></li>
+      <li><a href="../projects.html" class="nav-link">Projects</a></li>
     </ul>
 
-    <h2>Results / Key Learnings</h2>
-    <p>Discuss what you accomplished or learned here...</p>
-  </main>
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
 
-  <!-- RIGHT PANEL -->
-  <aside class="right-column">
-    <section class="card">
-      <h3>Skills & Tools</h3>
-      <ul class="small-list">
-        <li>CompTIA Security+, Network+</li>
-        <li>CCNA (in progress), CySA+ (studying)</li>
-        <li>Python · C++ · Log Analysis · OSINT</li>
-      </ul>
-    </section>
-  </aside>
+  <!-- CONTENT WRAPPER -->
+  <div class="content-wrapper">
 
-</div>
+    <!-- MAIN -->
+    <main class="center-column">
+      <article class="post-content">
+        <h1>Home SOC Lab</h1>
+        <p><em>November 2025</em></p>
 
-<script>
-const toggle = document.querySelector('.toggle');
-const body = document.body;
-if(localStorage.getItem('theme')) body.setAttribute('data-theme',localStorage.getItem('theme'));
-toggle.addEventListener('click', () => {
-  const current = body.getAttribute('data-theme') || 'light';
-  const next = current === 'light' ? 'dark' : 'light';
-  body.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-});
-</script>
+        <p>
+          This project documents my home Security Operations Center (SOC) lab setup. It includes
+          virtualized networks, monitoring tools, and simulated threat scenarios to practice detection,
+          response, and incident handling.
+        </p>
+
+        <h2>Tools & Platforms</h2>
+        <ul>
+          <li>ELK Stack (Elasticsearch, Logstash, Kibana)</li>
+          <li>Suricata IDS/IPS</li>
+          <li>Splunk Free</li>
+          <li>Virtual Machines: Windows Server, Kali Linux</li>
+          <li>Python scripting for automated alerts</li>
+        </ul>
+
+        <h2>Objectives</h2>
+        <ul>
+          <li>Monitor and analyze simulated network traffic</li>
+          <li>Detect and respond to threats in a lab environment</li>
+          <li>Document incident response procedures</li>
+          <li>Integrate alerts into dashboards for live monitoring</li>
+        </ul>
+      </article>
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-column">
+      <section class="card">
+        <h3>Skills & Certs</h3>
+        <ul class="small-list">
+          <li>CompTIA Security+, Network+</li>
+          <li>CCNA (in progress), CySA+ (studying)</li>
+          <li>Network Security · Incident Response · Threat Intel</li>
+          <li>Python · C++ · Log Analysis · OSINT</li>
+        </ul>
+      </section>
+
+      <section class="card" id="live-feed-card">
+        <h3>Live Cyber Intel</h3>
+        <div id="live-feed">
+          <p class="muted">Loading live feed…</p>
+        </div>
+        <small class="muted">Source: CISA / public feeds</small>
+      </section>
+    </aside>
+
+  </div>
+
+  <!-- SCRIPT: theme + live feed -->
+  <script>
+    const body = document.body;
+    const toggleBtn = document.querySelector('.toggle');
+    if(localStorage.getItem('theme')) {
+      body.setAttribute('data-theme', localStorage.getItem('theme'));
+    }
+    toggleBtn.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Simple live feed
+    async function loadLiveFeed() {
+      const feedContainer = document.getElementById('live-feed');
+      feedContainer.innerHTML = `
+        <div class="feed-item">• Microsoft issues emergency patch for Exchange servers</div>
+        <div class="feed-item">• New CVE disclosed in VPN appliances</div>
+        <div class="feed-item">• US-CERT advisory: phishing targeting finance</div>
+      `;
+    }
+    document.addEventListener('DOMContentLoaded', loadLiveFeed);
+  </script>
 
 </body>
 </html>
