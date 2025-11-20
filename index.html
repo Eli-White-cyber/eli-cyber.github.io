@@ -226,7 +226,7 @@
 
   async function loadRelated(postMeta) {
     try {
-      const r = await fetch(POSTS_JSON);
+      const r = await fetch(POST_JSON);
       const posts = await r.json();
       const related = posts.filter(p => {
         if (!postMeta.tags || !p.tags) return false;
@@ -246,7 +246,7 @@
           const file = a.getAttribute('data-file');
           const postResp = await fetch(POST_JSON);
           const postJson = await postResp.json();
-          const found = postsJson.find(x=>x.file===file);
+          const found = postJson.find(x=>x.file===file);
           if (found) openArticleInPage(found);
         });
       });
