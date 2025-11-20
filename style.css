@@ -157,6 +157,49 @@ body{
   color: var(--accent);
 }
 
+/* ----------------- MAIN CONTENT FOR SINGLE PAGES ----------------- */
+.main-content {
+  margin-left: 280px; /* same width as sidebar + spacing */
+  padding: 40px 24px;
+  max-width: 900px;
+  background: var(--panel);
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: var(--card-shadow);
+  text-align: left;
+  line-height: 1.7;
+}
+
+.main-content h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+
+.main-content h2 {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.main-content p, .main-content ul {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.main-content ul {
+  padding-left: 20px;
+}
+
+.main-content li {
+  margin-bottom: 6px;
+}
+
+.main-content em {
+  color: var(--accent);
+}
+
 
 /* ARTICLE VIEW (AJAX loaded) */
 .article-view{max-width:900px;padding:14px;border-radius:8px;background:var(--panel);box-shadow:var(--card-shadow)}
