@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Cyber Threat Report",
+    "date": "2025-11-18",
+    "tags": ["Malware","Threat Intel"],
+    "file": "2025-11-18-cyber-brief.html",
+    "preview": "Preview of daily cyber intelligence reporting and analysis..."
+  },
+  {
+    "title": "Another Cyber Post",
+    "date": "2025-11-15",
+    "tags": ["Phishing","Incident Response"],
+    "file": "2025-11-15-phishing-alert.html",
+    "preview": "Summary of phishing attacks and mitigation tips..."
+  }
+]
