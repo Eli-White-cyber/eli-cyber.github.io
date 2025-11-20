@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elijah White | Cyber Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elijah White — Cyber Portfolio</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,101 +14,300 @@
 </head>
 <body data-theme="light">
 
-  <!-- LEFT SIDEBAR -->
-  <div class="sidebar">
-    <div class="title">My Cyber Blog</div>
-    <a href="index.html">Home</a>
-    <a href="posts.html">Posts</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <div class="toggle">Toggle Dark Mode</div>
-  </div>
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
+      </div>
+    </div>
 
-  <!-- MAIN + RIGHT PANEL -->
-  <div class="content-container">
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="posts.html" class="nav-link">All Posts</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+    </ul>
 
-    <!-- MAIN CONTENT -->
-    <main class="main">
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
 
-      <!-- HERO SECTION -->
-      <section class="hero">
+  <!-- CONTENT (main + right) -->
+  <div class="content-wrapper">
+
+    <!-- CENTER / MAIN -->
+    <main class="center-column">
+
+      <!-- HERO -->
+      <header class="hero">
         <h1>Elijah White</h1>
-        <h2>Cybersecurity Major | Aspiring HSI/FBI Cyber Agent</h2>
-        <p>Sharing insights, cyber intel, and personal projects in the world of cybersecurity.</p>
+        <h2 class="hero-sub">Cybersecurity Major · CS Minor · Aspiring HSI/FBI Cyber Agent</h2>
+        <p class="hero-blurb">Daily cyber intel, technical writeups, and projects on threat analysis, network security, and incident response.</p>
+      </header>
+
+      <!-- POSTS FEED (dynamic) -->
+      <section id="feed" class="feed">
+        <!-- posts inserted here by script -->
       </section>
 
-      <!-- POSTS FEED -->
-      <section class="posts" id="recent-posts">
-        <!-- Dynamic posts will load here -->
-      </section>
-
+      <!-- ARTICLE VIEW (when a post is opened in-page; hidden by default) -->
+      <article id="article-view" class="article-view" hidden>
+        <a id="close-article" class="close-article">← Back to feed</a>
+        <div id="article-content"></div>
+      </article>
     </main>
 
     <!-- RIGHT PANEL -->
-    <aside class="right-panel">
+    <aside class="right-column" aria-label="Info and live feed">
 
-      <section class="skills">
-        <h3>Skills & Certifications</h3>
-        <ul>
-          <li>Sec+</li>
-          <li>Net+</li>
-          <li>CCNA (in progress)</li>
-          <li>CySA+ (in progress)</li>
+      <!-- Dynamic article metadata / related -->
+      <section class="card" id="meta-card">
+        <h3>Article Info</h3>
+        <div id="meta-content">
+          <p>Select a post to view details and related tags.</p>
+        </div>
+      </section>
+
+      <!-- Skills / Certs -->
+      <section class="card">
+        <h3>Skills & Certs</h3>
+        <ul class="small-list">
+          <li>CompTIA Security+, Network+</li>
+          <li>CCNA (in progress), CySA+ (studying)</li>
+          <li>Network Security · Incident Response · Threat Intel</li>
+          <li>Python · C++ · Log Analysis · OSINT</li>
         </ul>
       </section>
 
-      <section class="career-goals">
-        <h3>Career Goals</h3>
-        <p>Aspiring HSI/FBI Cyber Agent focused on cybersecurity operations and threat intelligence.</p>
-      </section>
-
-      <section class="links">
-        <h3>Profiles</h3>
-        <a href="https://medium.com/@eliwhite" target="_blank">Medium</a><br>
-        <a href="https://www.linkedin.com/in/elijah-white" target="_blank">LinkedIn</a>
+      <!-- Live Feed -->
+      <section class="card" id="live-feed-card">
+        <h3>Live Cyber Intel</h3>
+        <div id="live-feed">
+          <p class="muted">Loading live feed…</p>
+        </div>
+        <small class="muted">Source: CISA / public feeds (may be proxied)</small>
       </section>
 
     </aside>
-
   </div>
 
-  <!-- JAVASCRIPT -->
+  <!-- SCRIPT: posts loader, SPA article load, theme, live feed -->
   <script>
-    const toggle = document.querySelector('.toggle');
-    const body = document.body;
+  // ----------------------
+  // Config
+  // ----------------------
+  const POSTS_JSON = 'posts/posts.json'; // must exist in /posts
+  const LIVE_FEED_PROXY = 'https://api.allorigins.win/raw?url='; // free proxy; may rate-limit
+  const LIVE_FEED_URLS = [
+    'https://www.cisa.gov/uscert/ncas/alerts.xml',
+    'https://www.us-cert.gov/ncas/alerts.xml' // alternate (some sites)
+  ];
 
-    // Load saved theme
-    if(localStorage.getItem('theme')) {
-      body.setAttribute('data-theme', localStorage.getItem('theme'));
+  // ----------------------
+  // Theme (toggle + persist)
+  // ----------------------
+  const body = document.body;
+  const toggleBtn = document.querySelector('.toggle');
+
+  if (localStorage.getItem('theme')) {
+    body.setAttribute('data-theme', localStorage.getItem('theme'));
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const current = body.getAttribute('data-theme') || 'light';
+    const next = current === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ----------------------
+  // Helper: create element from HTML string
+  // ----------------------
+  function htmlToElement(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
+  }
+
+  // ----------------------
+  // Load posts.json and render feed
+  // ----------------------
+  async function loadFeed() {
+    try {
+      const r = await fetch(POSTS_JSON);
+      if (!r.ok) throw new Error('posts JSON not found');
+      const posts = await r.json();
+
+      const feed = document.getElementById('feed');
+      feed.innerHTML = ''; // clear
+
+      posts.forEach(post => {
+        const tags = (post.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ');
+        const html = `
+          <article class="post-card" data-file="${post.file}" data-date="${post.date || ''}" data-tags='${JSON.stringify(post.tags||[])}'>
+            <h3 class="post-title">${post.title}</h3>
+            <div class="tag-row">${tags}</div>
+            <p class="post-excerpt">${post.preview || ''}</p>
+            <div class="post-actions">
+              <button class="open-btn">Open</button>
+              <a class="open-new" href="posts/${post.file}" target="_blank" rel="noopener">Open in new tab</a>
+            </div>
+          </article>
+        `;
+        const el = htmlToElement(html);
+        // open in-page
+        el.querySelector('.open-btn').addEventListener('click', () => openArticleInPage(post));
+        feed.appendChild(el);
+      });
+    } catch (err) {
+      console.error('Error loading posts.json', err);
+      document.getElementById('feed').innerHTML = '<p class="muted">Failed to load posts.json — check that /posts/posts.json exists.</p>';
     }
+  }
 
-    // Toggle dark mode
-    toggle.addEventListener('click', () => {
-      const current = body.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
+  // ----------------------
+  // Open article in-page (AJAX) and update right panel metadata
+  // ----------------------
+  async function openArticleInPage(postMeta) {
+    try {
+      const filePath = 'posts/' + postMeta.file;
+      const r = await fetch(filePath);
+      if (!r.ok) throw new Error('post file not found');
+      const html = await r.text();
 
-    // Load posts dynamically from posts/posts.json
-    fetch('posts/posts.json')
-      .then(res => res.json())
-      .then(posts => {
-        const container = document.getElementById('recent-posts');
-        posts.forEach(post => {
-          const tags = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-          container.innerHTML += `
-            <a href="posts/${post.file}" style="text-decoration:none;">
-              <div class="post-card">
-                <h3>${post.title}</h3>
-                ${tags}
-                <p>${post.preview}</p>
-              </div>
-            </a>
-          `;
+      // insert into article view (we expect the post HTML to contain only the article body area)
+      const contentDiv = document.getElementById('article-content');
+      contentDiv.innerHTML = html;
+
+      // show article-view and hide feed
+      document.getElementById('article-view').hidden = false;
+      document.getElementById('feed').hidden = true;
+      window.scrollTo({top:0, behavior:'smooth'});
+
+      // update meta card
+      updateMetaCard(postMeta);
+
+    } catch (err) {
+      console.error('Failed loading post', err);
+      alert('Failed to load post: ' + err.message);
+    }
+  }
+
+  // close article view
+  document.getElementById('close-article').addEventListener('click', () => {
+    document.getElementById('article-view').hidden = true;
+    document.getElementById('feed').hidden = false;
+  });
+
+  // ----------------------
+  // Update right meta card with tags/date and "related" (simple)
+  // ----------------------
+  function updateMetaCard(postMeta) {
+    const container = document.getElementById('meta-content');
+    const tags = (postMeta.tags || []).map(t => `<span class="tag small">${t}</span>`).join(' ');
+    container.innerHTML = `
+      <p><strong>${postMeta.title}</strong></p>
+      <p class="muted">Date: ${postMeta.date || 'n/a'}</p>
+      <div class="meta-tags">${tags}</div>
+      <hr>
+      <p><strong>Related</strong></p>
+      <ul id="related-list" class="small-list">
+        <li>Loading related…</li>
+      </ul>
+    `;
+    // simple related: show other posts sharing tags (client-side)
+    loadRelated(postMeta);
+  }
+
+  async function loadRelated(postMeta) {
+    try {
+      const r = await fetch(POSTS_JSON);
+      const posts = await r.json();
+      const related = posts.filter(p => {
+        if (!postMeta.tags || !p.tags) return false;
+        return p.file !== postMeta.file && p.tags.some(t => postMeta.tags.includes(t));
+      }).slice(0,5);
+
+      const el = document.getElementById('related-list');
+      if (!related.length) {
+        el.innerHTML = '<li class="muted">No related posts found.</li>';
+        return;
+      }
+      el.innerHTML = related.map(rp => `<li><a href="#" class="related-link" data-file="${rp.file}">${rp.title}</a></li>`).join('');
+      // attach click handlers
+      document.querySelectorAll('.related-link').forEach(a => {
+        a.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const file = a.getAttribute('data-file');
+          const postsResp = await fetch(POSTS_JSON);
+          const postsJson = await postsResp.json();
+          const found = postsJson.find(x=>x.file===file);
+          if (found) openArticleInPage(found);
         });
       });
+
+    } catch (err) {
+      console.error('related load fail', err);
+    }
+  }
+
+  // ----------------------
+  // Live feed loader (tries proxy, falls back to static)
+  // ----------------------
+  async function loadLiveFeed() {
+    const feedContainer = document.getElementById('live-feed');
+    feedContainer.innerHTML = '<p class="muted">Fetching live feed…</p>';
+
+    // try each feed URL via proxy until one works
+    for (const url of LIVE_FEED_URLS) {
+      try {
+        const resp = await fetch(LIVE_FEED_PROXY + encodeURIComponent(url));
+        if (!resp.ok) throw new Error('proxy fetch failed');
+        const text = await resp.text();
+        // parse XML
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'application/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0,6);
+        if (!items.length) throw new Error('no items');
+        feedContainer.innerHTML = items.map(it => {
+          const title = it.querySelector('title')?.textContent || 'No title';
+          const link = it.querySelector('link')?.textContent || '#';
+          const pub = it.querySelector('pubDate')?.textContent || '';
+          return `<div class="feed-item"><a href="${link}" target="_blank" rel="noopener">${title}</a><div class="muted small">${pub}</div></div>`;
+        }).join('');
+        return;
+      } catch (err) {
+        console.warn('feed failed for', url, err);
+        // try next
+      }
+    }
+
+    // fallback static
+    feedContainer.innerHTML = `
+      <div class="feed-item">• Microsoft issues emergency patch for Exchange servers</div>
+      <div class="feed-item">• New CVE disclosed in widely used VPN appliances</div>
+      <div class="feed-item">• US-CERT advisory: phishing campaign targeting finance</div>
+    `;
+  }
+
+  // ----------------------
+  // Init
+  // ----------------------
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFeed();
+    loadLiveFeed();
+  });
+
   </script>
 
+  <style>
+  /* Inline minimal overrides so pages loading this index.html alone will show okay.
+     The main styling comes from style.css file in repository. */
+  </style>
 </body>
 </html>
