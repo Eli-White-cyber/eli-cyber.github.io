@@ -5,64 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyber Projects</title>
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body data-theme="light">
 
-<!-- Sidebar -->
-<div class="sidebar">
-  <div class="title">CYBER INTEL</div>
-  <a href="index.html">Home</a>
-  <a href="posts.html">Blog Posts</a>
-  <a href="projects.html">Cyber Projects</a>
-  <a href="about.html">About Me</a>
-  <div class="toggle">Toggle Dark Mode</div>
-</div>
+<!-- LEFT NAV -->
+<nav class="nav-left">
+  <div class="brand">
+    <div class="logo">EW</div>
+    <div class="brand-text">
+      <div class="name">Elijah White</div>
+      <div class="sub">Cyber Portfolio</div>
+    </div>
+  </div>
 
-<!-- Main Content -->
-<div class="main">
-  <h1>Cyber Projects & Labs</h1>
-  <div id="project-feed"></div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="posts.html" class="nav-link">All Posts</a></li>
+    <li><a href="projects.html" class="nav-link">Projects</a></li>
+    <li><a href="about.html" class="nav-link">About Me</a></li>
+  </ul>
+
+  <div class="nav-bottom">
+    <button class="toggle">Toggle Dark Mode</button>
+    <div class="small-note">JetBrains × Clean Tech</div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content-wrapper">
+
+  <!-- MAIN / CENTER -->
+  <main class="center-column">
+    <h1>Cyber Projects & Labs</h1>
+    <section id="project-feed">
+      <!-- Dynamic project cards will load here -->
+    </section>
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right-column">
+    <section class="card" id="project-meta">
+      <h3>Project Info</h3>
+      <div id="meta-content">
+        <p>Select a project to view details and related skills.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Skills & Tools</h3>
+      <ul class="small-list">
+        <li>CompTIA Security+, Network+</li>
+        <li>CCNA (in progress), CySA+ (studying)</li>
+        <li>Python · C++ · Log Analysis · OSINT</li>
+      </ul>
+    </section>
+
+    <section class="card" id="live-feed-card">
+      <h3>Live Cyber Intel</h3>
+      <div id="live-feed">
+        <p class="muted">Loading live feed…</p>
+      </div>
+      <small class="muted">Source: CISA / public feeds</small>
+    </section>
+  </aside>
+
 </div>
 
 <script>
-const toggle = document.querySelector('.toggle');
+const toggleBtn = document.querySelector('.toggle');
 const body = document.body;
 
-// Load saved theme
-if(localStorage.getItem('theme')) {
+if (localStorage.getItem('theme')) {
   body.setAttribute('data-theme', localStorage.getItem('theme'));
 }
 
-// Toggle theme
-toggle.addEventListener('click', () => {
-  const current = body.getAttribute('data-theme');
+toggleBtn.addEventListener('click', () => {
+  const current = body.getAttribute('data-theme') || 'light';
   const next = current === 'light' ? 'dark' : 'light';
   body.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 });
 
 // Load projects dynamically
-fetch('projects/projects.json')
-  .then(res => res.json())
-  .then(projects => {
+async function loadProjects() {
+  try {
+    const res = await fetch('projects/projects.json');
+    const projects = await res.json();
     const container = document.getElementById('project-feed');
-    projects.forEach(project => {
-      const tags = (project.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ');
-      container.innerHTML += `
-        <a href="projects/${project.file}" style="text-decoration:none;">
-          <div class="post-card">
-            <h3>${project.title}</h3>
-            ${tags ? `<div class="tag-row">${tags}</div>` : ''}
-            <p>${project.preview}</p>
-          </div>
-        </a>
+    container.innerHTML = '';
+
+    projects.forEach(proj => {
+      const tags = (proj.tags || []).map(t => `<span class="tag">${t}</span>`).join(' ');
+      const card = document.createElement('div');
+      card.classList.add('post-card');
+      card.innerHTML = `
+        <h3>${proj.title}</h3>
+        ${tags ? `<div class="tag-row">${tags}</div>` : ''}
+        <p>${proj.preview}</p>
+        <div class="post-actions">
+          <button class="open-btn">Open</button>
+          <a class="open-new" href="projects/${proj.file}" target="_blank">Open in new tab</a>
+        </div>
       `;
+      // open project in-page (update right panel)
+      card.querySelector('.open-btn').addEventListener('click', () => {
+        updateMeta(proj);
+        window.scrollTo({top:0, behavior:'smooth'});
+      });
+
+      container.appendChild(card);
     });
-  })
-  .catch(err => {
+  } catch (err) {
     console.error('Failed to load projects.json', err);
     document.getElementById('project-feed').innerHTML = '<p class="muted">No projects found.</p>';
-  });
+  }
+}
+
+// Update right panel metadata
+function updateMeta(proj) {
+  const container = document.getElementById('meta-content');
+  const tags = (proj.tags || []).map(t => `<span class="tag small">${t}</span>`).join(' ');
+  container.innerHTML = `
+    <p><strong>${proj.title}</strong></p>
+    <p class="muted">Date: ${proj.date || 'n/a'}</p>
+    <div class="meta-tags">${tags}</div>
+  `;
+}
+
+// Live feed (optional, same as blog)
+async function loadLiveFeed() {
+  const feedContainer = document.getElementById('live-feed');
+  feedContainer.innerHTML = '<p class="muted">Fetching live feed…</p>';
+  feedContainer.innerHTML = `
+    <div class="feed-item">• Microsoft issues emergency patch for Exchange servers</div>
+    <div class="feed-item">• New CVE disclosed in VPN appliances</div>
+    <div class="feed-item">• US-CERT advisory: phishing campaign targeting finance</div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProjects();
+  loadLiveFeed();
+});
 </script>
 
 </body>
