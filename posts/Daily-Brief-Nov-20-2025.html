@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Title — Cyber Portfolio</title>
+  <link rel="stylesheet" href="../style.css"> <!-- adjust path as needed -->
+</head>
+<body data-theme="light">
+
+  <!-- LEFT NAV -->
+  <nav class="nav-left" aria-label="Main navigation">
+    <div class="brand">
+      <div class="logo">EW</div>
+      <div class="brand-text">
+        <div class="name">Elijah White</div>
+        <div class="sub">Cyber Portfolio</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../posts.html">All Posts</a></li>
+      <li><a href="../about.html">About Me</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+    </ul>
+    <div class="nav-bottom">
+      <button class="toggle">Toggle Dark Mode</button>
+      <div class="small-note">JetBrains × Clean Tech</div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="center-column">
+    <article class="article-content">
+      <h1>Daily Cyber Brief</h1>
+      <p><strong>Date:</strong> Nov 20, 2025</p>
+      <p><strong>Author:</strong> Elijah White</p>
+
+      <p>Welcome to my cyber intelligence blog, where I cover major cybersecurity events each day. These posts provide clear, concise insights into the latest threats and trends, helping readers understand how the digital world is being shaped by cyber activity.</p>
+
+      <hr>
+
+      <h2>FCC Withdraws Telecom Cybersecurity Mandates After Salt Typhoon Hack</h2>
+
+      <h3>The Breaking Details</h3>
+      <p>The <strong>Federal Communications Commission (FCC)</strong> voted today to revoke the cybersecurity rules that were put in place after the US Government discovered the <em>Salt Typhoon</em> cyberattack a year ago. Experts consider this attack one of the most damaging China-backed cyber espionage campaigns to date, affecting major telecom providers like Verizon and AT&T and potentially compromising sensitive U.S. intelligence systems.</p>
+
+      <p>The FCC voted <strong>2-1</strong> in favor of revoking the <strong>Communications Assistance for Law Enforcement Act (CALEA)</strong>. This was one of the final acts of the Biden administration. CALEA had been enacted after 600 organizations and 80 countries were impacted by the Salt Typhoon attacks, requiring telecom providers to submit proof of updated cybersecurity risk management plans annually.</p>
+
+      <p>Telecom executives agreed to implement additional cybersecurity measures, including:</p>
+      <ul>
+        <li>Accelerated patching</li>
+        <li>Reviewing access controls</li>
+        <li>Improving threat-hunting efforts</li>
+        <li>Disabling unnecessary outbound connections</li>
+        <li>Increasing information-sharing with the federal government</li>
+      </ul>
+      <p>The FCC stated these voluntary steps made the previous rules redundant.</p>
+
+      <p>The Trump Administration has not yet responded to the vote or the Salt Typhoon attacks. Meanwhile, the House has passed a bill to establish an interagency group, led by <strong>CISA</strong>, to respond to China-backed cyberattacks.</p>
+
+      <h3>The People Behind the Decision</h3>
+      <ul>
+        <li><strong>Federal Communications Commission:</strong> Voted 2-1 to revoke the telecom cybersecurity rules.</li>
+        <li><strong>FCC Chair Brendan Carr:</strong> Led the effort to revoke the regulations, stating CALEA was not the right vehicle for these requirements.</li>
+        <li><strong>FCC Cybersecurity Division Chief Leon Kenworthy:</strong> Supported the rollback, saying the rules were redundant.</li>
+        <li><strong>Telecommunications companies:</strong> Agreed to implement cybersecurity measures and share threat information with the federal government.</li>
+        <li><strong>Senators and Commissioners opposing rollback:</strong>
+          <ul>
+            <li>Sen. Maria Cantwell (D-Wash.) and Sen. Gary Peters (D-Mich.): Criticized the rollback.</li>
+            <li>Democratic FCC Commissioner Anna Gomez: Advocated for enforceable frameworks to strengthen network security.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Why You Should Care</h3>
+      <p>By revoking mandatory cybersecurity rules, the FCC shifts responsibility from federal oversight to voluntary industry action. While telecom providers have agreed to implement safeguards and share threat intelligence, self-regulation may leave critical communications networks vulnerable to nation-state attacks. This decision underscores the ongoing tension between regulatory enforcement and collaborative cybersecurity approaches in protecting national infrastructure.</p>
+
+      <h3>My Analysis</h3>
+      <p>Decisions like these are made carefully, with the goal of benefiting both industry and the public. While the original plan had valuable aspects, the FCC and telecom companies argued it was redundant and committed to continuously improving their cybersecurity strategies. From the opposition’s perspective, returning control to the companies partly caused this issue in the first place.</p>
+      <p>Ultimately, if the companies and federal agencies maintain clear communication and follow through on their commitments, the risk of incidents like the Salt Typhoon attack should remain low. Success depends on trust and collaboration between industry and government.</p>
+
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.axios.com/2025/11/20/fcc-telecom-cybersecurity" target="_blank">AXIOS - FCC rolls back telecom cybersecurity rules</a></li>
+        <li><a href="https://www.axios.com/2025/11/20/fcc" target="_blank">AXIOS - FCC</a></li>
+        <li><a href="https://www.axios.com/2025/11/20/typhoonattack" target="_blank">AXIOS - Typhoonattack</a></li>
+      </ul>
+
+    </article>
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right-column">
+    <section class="card">
+      <h3>Post Info</h3>
+      <p>Date: 2025-11-19</p>
+      <p>Tags: <span class="tag">Cyber</span> <span class="tag">Threat Intel</span></p>
+    </section>
+    <section class="card">
+      <h3>Skills & Certs</h3>
+      <ul class="small-list">
+        <li>Security+, Network+</li>
+        <li>CCNA (in progress), CySA+</li>
+        <li>Python · C++ · Threat Intel</li>
+      </ul>
+    </section>
+  </aside>
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle');
+    const body = document.body;
+    if(localStorage.getItem('theme')) {
+      body.setAttribute('data-theme', localStorage.getItem('theme'));
+    }
+    toggleBtn.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+
+</body>
+</html>
