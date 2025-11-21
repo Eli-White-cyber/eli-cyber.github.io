@@ -4,16 +4,15 @@
     "file": "first-post.html",
     "preview": "This is my first post, introducing my cybersecurity blog...",
     "tags": ["intro", "cyber", "career"]
-  }
-]
-[
+  },
   {
     "title": "FCC Withdraws Telecom Cybersecurity Mandates After Salt Typhoon Hack",
-    "file": "Daily-Brief-Nov-20-2025.html"
+    "file": "Daily-Brief-Nov-20-2025.html",
     "preview": "The FCC voted to revoke telecom cybersecurity rules after the Salt Typhoon attack. Telecoms agreed to implement voluntary safeguards while some lawmakers criticized the rollback.",
-    "tags": ["Cybersecurity", "Telecom", "Threat Intel"],
+    "tags": ["Cybersecurity", "Telecom", "Threat Intel"]
   }
 ]
+
 
 
 
