@@ -1,17 +1,10 @@
-
 [
   {
     "title": "FCC Withdraws Telecom Cybersecurity Mandates After Salt Typhoon Hack",
     "file": "Daily-Brief-Nov-20-2025.html"
-    "date": "2025-11-20",
-    "author": "Elijah White",
     "preview": "The FCC voted to revoke telecom cybersecurity rules after the Salt Typhoon attack. Telecoms agreed to implement voluntary safeguards while some lawmakers criticized the rollback.",
     "tags": ["Cybersecurity", "Telecom", "Threat Intel"],
   }
-]
-
-
-[
   {
     "title": "Welcome to My Cyber Blog",
     "file": "first-post.html",
@@ -19,6 +12,7 @@
     "tags": ["intro", "cyber", "career"]
   }
 ]
+
 
 
 
